@@ -11,13 +11,13 @@ const {
 const defaultIgnore = /node_modules|[/\\]\./
 const defaultRootPath = process.cwd()
 
-module.exports = (setting) => {
+module.exports = (options) => {
 
-    let watchingIn = setting.rootPath === undefined ? defaultRootPath : setting.rootPath
-    let ignoredFiles = setting.ignored === undefined ? defaultIgnore : setting.ignored
+    let watchingIn = options.rootPath === undefined ? defaultRootPath : options.rootPath
+    let ignoredFiles = options.ignored === undefined ? defaultIgnore : options.ignored
 
     console.log(`Chokidar watching at: ${watchingIn}`)
-    // setting.rules = [rule1, rule2, ...]
+    // options.rules = [rule1, rule2, ...]
     // rule = {
     //      action: 'app.relaunch' | 'win.reload' | 'script',
     //      target: regex,
@@ -27,12 +27,12 @@ module.exports = (setting) => {
         ignored: ignoredFiles
     }).on('change', (path, stats) => {
         if (stats) {
-            if (setting.rules === undefined) {
+            if (options.rules === undefined) {
                 windowReload(path)
             } else {
                 let ac = 'win.reload'
                 let spt
-                for (rule of setting.rules) {
+                for (rule of options.rules) {
                     // this file has specific rule
                     if (path.search(new RegExp(rule.target)) !== -1) {
                         ac = rule.action

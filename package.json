@@ -1,13 +1,23 @@
 {
-  "name": "electron-nice-reload",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "youyinnn",
-  "license": "ISC",
-  "repository": {"url": ""},
-  "keywords": ["electron", "reload"]
+    "name": "electron-nice-auto-reload",
+    "version": "1.0.0",
+    "description": "A nice way for realtime-reloading your electron while developing.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "youyinnn",
+    "license": "ISC",
+    "repository": {
+        "url": "https://github.com/youyinnn/electron-nice-auto-reload.git"
+    },
+    "keywords": [
+        "electron",
+        "auto-reload",
+        "node"
+    ],
+    "devDependencies": {},
+    "dependencies": {
+        "chokidar": "^3.2.2"
+    }
 }
