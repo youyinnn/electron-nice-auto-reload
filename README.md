@@ -1,6 +1,22 @@
-## Electron Nice Auto Reload :rocket: 
+## :rocket: Electron Nice Auto Reload 
 
-Reload your electron nicely while developing.
+![npm](https://img.shields.io/npm/dw/electron-nice-auto-reload?label=week-download&style=flat-square) [![npm](https://img.shields.io/npm/v/electron-nice-auto-reload.svg?label=version&style=flat-square)](https://www.npmjs.com/package/electron-nice-auto-reload) ![NPM](https://img.shields.io/npm/l/electron-nice-auto-reload?style=flat-square)
+
+**Reload your electron app nicely while developing !!!**
+
+### Relaunch,Reload,Run-Script
+
+If you want to relauch the app while we make some change in `main.js`
+
+![relaunch](./img/relaunch.gif)
+
+Or you just happen to change a css file, and it just need to reload the window:
+
+![reload](./img/reload.gif)
+
+Somehow you want more, you want to run a npm command while you change your `.less` file and it need to run command to generate a new css file:
+
+![runscript](./img/runscript.gif)
 
 ### Install
 
@@ -10,13 +26,14 @@ npm i electron-nice-auto-reload
 
 ### How To Use
 
-`require`  in someplace
+`require`  in your main process
 
 ``` javascript
 require('electron-nice-auto-reload')({
     rootPath: ...,
     rules: [],
-    ignored: ...
+    ignored: ...(pass to chokidar),
+    log: true
 })
 ```
 
@@ -27,7 +44,7 @@ require('electron-nice-auto-reload')({
     rootPath: path.join(process.cwd(), 'src'),
     rules: [
         {
-        	// run lessc while style.less file is changed
+            // run lessc while style.less file is changed
             // and this script will change the style.css
             // hence reload all windows
             action: 'script',
@@ -55,16 +72,18 @@ then start your electron app and develop it
 - `rules`:
 
   ``` javascript
-  // setting.rules = [rule1, rule2, ...]
-  // rule = {
-  //      action: 'app.relaunch' | 'win.reload' | 'script',
-  //      target: regex,
-  //      script: string
-  // }
+  // Structure:
+  //    options.rules = [rule1, rule2, ...]
+  //    rule = {
+  //       action: 'app.relaunch' | 'win.reload' | 'script',
+  //       target: regex,
+  //       script: string
+  //    }
   ```
 
-  - **action** means we can relaunch the app, reload all the [BrowserWindow]( https://electronjs.org/docs/api/browser-window ) or even run script with [node child_process.exec()]( https://nodejs.org/dist/latest-v12.x/docs/api/child_process.html#child_process_child_process_exec_command_options_callback )
+  - **action** means we can relaunch the app, reload all the [BrowserWindow]( https://electronjs.org/docs/api/browser-window ) or even run script with [node child_process.exec()]( https://nodejs.org/dist/latest-v12.x/docs/api/child_process.html#child_process_child_process_exec_command_options_callback ). By default it is `'win.reload'`
   - **target** means a regex string for matching a bunch of files for specific action
   - **script** means the script you use to run
 
 - `ignored`: same as **chokidar**
+- `log`: means to show the log or not. By default it is `false`
