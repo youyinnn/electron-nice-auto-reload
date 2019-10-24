@@ -16,6 +16,7 @@ module.exports = (options) => {
     let watchingIn = options.rootPath === undefined ? defaultRootPath : options.rootPath
     let ignoredFiles = options.ignored === undefined ? defaultIgnore : options.ignored
     let log = options.log === undefined ? false : options.log
+    let devToolro = options.devToolsReopen === undefined ? false : options.devToolsReopen
 
     console.log(`Chokidar watching at: ${watchingIn}`)
     // options.rules = [rule1, rule2, ...]
@@ -108,7 +109,17 @@ module.exports = (options) => {
                 if (log)
                     console.log(`Reloaded for ${path} changed.`)
                 let wds = BrowserWindow.getAllWindows()
-                wds.forEach(bw => bw.webContents.reloadIgnoringCache())
+                wds.forEach(bw => {
+                    let ctx = bw.webContents
+                    if (ctx.isDevToolsOpened() && devToolro) {
+                        // if reopen devTool is needed
+                        ctx.reloadIgnoringCache()
+                        ctx.closeDevTools()
+                        ctx.openDevTools()
+                    } else {
+                        ctx.reloadIgnoringCache()
+                    }
+                })
                 winrllock = false
             }, 100);
         }

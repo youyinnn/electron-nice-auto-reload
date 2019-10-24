@@ -33,7 +33,8 @@ require('electron-nice-auto-reload')({
     rootPath: ...,
     rules: [],
     ignored: ...(pass to chokidar),
-    log: true
+    log: true,
+    devToolsReopen: true
 })
 ```
 
@@ -59,13 +60,15 @@ require('electron-nice-auto-reload')({
             target: 'preload.js|main.js'
         }
     ],
-    ignored: /node_modules/
+    ignored: /node_modules/,
+    log: true,
+    devToolsReopen: true
 })
 ```
 
 then start your electron app and develop it
 
-#### options
+#### Options
 
 - `rootPath`: the root path which **chokidar** is watching
 
@@ -85,5 +88,6 @@ then start your electron app and develop it
   - **target** means a regex string for matching a bunch of files for specific action
   - **script** means the script you use to run
 
-- `ignored`: same as **chokidar**
+- `ignored`: same as **chokidar**. By default it is `/node_modules|[/\\]\./`
 - `log`: means to show the log or not. By default it is `false`
+- `devToolsReopen`: means to reopen the devTools when the win.reload action is perform(to avoid some css style might misplace) By default it is `false`
