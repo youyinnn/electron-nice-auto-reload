@@ -1,6 +1,6 @@
 {
     "name": "electron-nice-auto-reload",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A nice way for realtime-reloading your electron while developing.",
     "main": "index.js",
     "scripts": {

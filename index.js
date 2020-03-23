@@ -113,9 +113,14 @@ module.exports = (options) => {
                     let ctx = bw.webContents
                     if (ctx.isDevToolsOpened() && devToolro) {
                         // if reopen devTool is needed
-                        ctx.reloadIgnoringCache()
                         ctx.closeDevTools()
-                        ctx.openDevTools()
+                        ctx.reloadIgnoringCache()
+                        ctx.on("did-frame-finish-load", () => {
+                            ctx.once("devtools-opened", () => {
+                                bw.focus()
+                            })
+                            ctx.openDevTools()
+                        })
                     } else {
                         ctx.reloadIgnoringCache()
                     }
