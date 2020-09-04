@@ -8,15 +8,15 @@
 
 If you want to relauch the app while we make some change in `main.js`
 
-![relaunch](./img/relaunch.gif)
+![relaunch](https://raw.githubusercontent.com/youyinnn/electron-nice-auto-reload/master/img/relaunch.gif)
 
 Or you just happen to change a css file, and it just need to reload the window:
 
-![reload](./img/reload.gif)
+![reload](https://raw.githubusercontent.com/youyinnn/electron-nice-auto-reload/master/img/reload.gif)
 
 Somehow you want more, you want to run a npm command while you change your `.less` file and it need to run command to generate a new css file:
 
-![runscript](./img/runscript.gif)
+![runscript](https://raw.githubusercontent.com/youyinnn/electron-nice-auto-reload/master/img/runscript.gif)
 
 ### Install
 
@@ -91,3 +91,7 @@ then start your electron app and develop it
 - `ignored`: same as **chokidar**. By default it is `/node_modules|[/\\]\./`
 - `log`: means to show the log or not. By default it is `false`
 - `devToolsReopen`: means to reopen the devTools when the win.reload action is perform(to avoid some css style might misplace) By default it is `false`
+
+### Changelog
+
+- 2020-09-04: mac OS support

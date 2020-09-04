@@ -30,7 +30,8 @@ module.exports = (options) => {
     var apprllock, winrllock, rslock = false
 
     chokidar.watch(watchingIn, {
-        ignored: ignoredFiles
+        ignored: ignoredFiles,
+        alwaysStat: true
     }).on('change', (path, stats) => {
         if (stats) {
             perform(path)
