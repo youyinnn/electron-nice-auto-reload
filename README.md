@@ -49,7 +49,7 @@ require('electron-nice-auto-reload')({
             // and this script will change the style.css
             // hence reload all windows
             action: 'script',
-            target: 'style.less',
+            target: 'style\\.less',
             // lessc src/css/style.less src/css/style.css
             script: 'npm run less'
         },
@@ -57,7 +57,7 @@ require('electron-nice-auto-reload')({
             // relaunch the app while main process related js files
             // were changed
             action: 'app.relaunch',
-            target: 'preload.js|main.js'
+            target: 'preload\\.js|main\\.js'
         }
     ],
     ignored: /node_modules/,
@@ -95,3 +95,4 @@ then start your electron app and develop it
 ### Changelog
 
 - 2020-09-04: mac OS support
+- 2020-09-05: do nothing when no rules on other files

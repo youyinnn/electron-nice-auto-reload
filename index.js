@@ -19,6 +19,7 @@ module.exports = (options) => {
     let devToolro = options.devToolsReopen === undefined ? false : options.devToolsReopen
 
     console.log(`Chokidar watching at: ${watchingIn}`)
+    
     // options.rules = [rule1, rule2, ...]
     // rule = {
     //      action: 'app.relaunch' | 'win.reload' | 'script',
@@ -40,9 +41,9 @@ module.exports = (options) => {
 
     function perform(path) {
         if (options.rules === undefined) {
-            windowReload(path)
+            console.log(`No rules config in electron-nice-reload, nothing happends.`)
         } else {
-            let ac = 'win.reload'
+            let ac
             let spt
             for (rule of options.rules) {
                 // this file has specific rule
@@ -58,9 +59,11 @@ module.exports = (options) => {
                 case 'script':
                     runScript(path, spt)
                     break
-                default:
+                case 'app.reload':
                     windowReload(path)
                     break;
+                default:
+                    console.log('No rules for [' + path + '], nothing happends.')
             }
         }
     }
@@ -84,6 +87,7 @@ module.exports = (options) => {
             } catch (e) {
                 if (log)
                     console.error(`Stderr: ${e}`);
+                rslock = false
             }
         }
     }
@@ -127,7 +131,7 @@ module.exports = (options) => {
                     }
                 })
                 winrllock = false
-            }, 100);
+            }, 250);
         }
     }
 }
